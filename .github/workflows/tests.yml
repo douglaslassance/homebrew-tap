@@ -11,8 +11,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-24.04, macos-15-intel, macos-26 ]
+        # No Intel runner. Every cask in this tap ships aarch64-apple-darwin
+        # only, so an Intel machine cannot install any of them and the job can
+        # never catch anything. It also has no bottles cached for Homebrew's own
+        # audit dependencies, so it starts compiling them and a syntax check
+        # turns into a half-hour source build against third-party mirrors.
+        #
+        # This is what homebrew-cask itself now does: `brew
+        # generate-cask-ci-matrix` picks runners from the casks a PR touches
+        # rather than from a fixed list, and would pick these two for this tap.
+        os: [ ubuntu-24.04, macos-26 ]
     runs-on: ${{ matrix.os }}
+    # A dead upstream mirror should fail in minutes, not hold a runner for half
+    # an hour. A passing run here takes about two.
+    timeout-minutes: 15
     permissions:
       actions: read
       checks: read

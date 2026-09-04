@@ -1,3 +1,17 @@
+# Downstream of Homebrew's own tap template. Keep it in step rather than
+# letting it drift into a private dialect, so this tap stays mergeable with
+# upstream and inherits their fixes:
+#
+#   https://github.com/Homebrew/brew/blob/main/.github/workflows/tap-new-tests.yml
+#
+# For cask-specific behaviour the reference is homebrew-cask's own CI, which
+# no longer uses a fixed matrix at all. It runs `brew generate-cask-ci-matrix`
+# and derives the runners from the casks a pull request touches:
+#
+#   https://github.com/Homebrew/homebrew-cask/blob/main/.github/workflows/ci.yml
+#
+# Worth re-checking both whenever Homebrew changes its CI.
+
 name: brew test-bot
 
 on:
@@ -11,15 +25,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # No Intel runner. Every cask in this tap ships aarch64-apple-darwin
-        # only, so an Intel machine cannot install any of them and the job can
-        # never catch anything. It also has no bottles cached for Homebrew's own
-        # audit dependencies, so it starts compiling them and a syntax check
-        # turns into a half-hour source build against third-party mirrors.
+        # Matches the upstream template, which carries no Intel runner. Ours
+        # had one, and it could not pay for itself: every cask here ships
+        # aarch64-apple-darwin only, so an Intel machine cannot install one.
         #
-        # This is what homebrew-cask itself now does: `brew
-        # generate-cask-ci-matrix` picks runners from the casks a PR touches
-        # rather than from a fixed list, and would pick these two for this tap.
+        # It was not merely useless but actively flaky. `brew style` installs
+        # shellcheck, whose dependency gmp had no x86_64 bottle, so the runner
+        # fell back to building it from source and spent 21 and 27 minutes on
+        # two separate pull requests timing out against gmplib.org.
+        #
+        # When this tap does ship an x86_64 cask, the upstream answer is not to
+        # hardcode a runner back in here. It is `brew generate-cask-ci-matrix`,
+        # which reads the arch a cask declares and schedules to match.
         os: [ ubuntu-24.04, macos-26 ]
     runs-on: ${{ matrix.os }}
     # A dead upstream mirror should fail in minutes, not hold a runner for half

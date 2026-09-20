@@ -6,7 +6,7 @@ cask "gitoptic" do
       verified: "api.douglaslassance.me/v1/gitoptic/"
   name "Gitoptic"
   desc "Visual diffs for binary files in Git"
-  homepage "https://github.com/douglaslassance/gitoptic"
+  homepage "https://douglaslassance.me/gitoptic"
 
   livecheck do
     url "https://api.douglaslassance.me/v1/gitoptic"

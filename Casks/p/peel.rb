@@ -5,7 +5,7 @@ cask "peel" do
   url "https://api.douglaslassance.me/v1/peel/download/#{version}/aarch64-apple-darwin"
   name "Peel"
   desc "Browse different"
-  homepage "https://peel.douglaslassance.me/"
+  homepage "https://douglaslassance.me/peel"
 
   livecheck do
     url "https://api.douglaslassance.me/v1/peel"

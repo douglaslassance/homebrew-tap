@@ -5,7 +5,7 @@ cask "rollpaper" do
   url "https://api.douglaslassance.me/v1/rollpaper/download/#{version}/aarch64-apple-darwin"
   name "Rollpaper"
   desc "Menu-bar wallpaper rotator"
-  homepage "https://github.com/douglaslassance/rollpaper"
+  homepage "https://douglaslassance.me/rollpaper"
 
   livecheck do
     url "https://api.douglaslassance.me/v1/rollpaper"

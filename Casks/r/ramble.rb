@@ -5,7 +5,7 @@ cask "ramble" do
   url "https://api.douglaslassance.me/v1/ramble/download/#{version}/aarch64-apple-darwin"
   name "Ramble"
   desc "Cross-post with ease"
-  homepage "https://github.com/douglaslassance/ramble"
+  homepage "https://douglaslassance.me/ramble"
 
   livecheck do
     url "https://api.douglaslassance.me/v1/ramble"

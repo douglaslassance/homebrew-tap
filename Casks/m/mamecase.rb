@@ -5,7 +5,7 @@ cask "mamecase" do
   url "https://api.douglaslassance.me/v1/mamecase/download/#{version}/aarch64-apple-darwin"
   name "Mamecase"
   desc "MAME front-end"
-  homepage "https://mamecase.douglaslassance.me/"
+  homepage "https://douglaslassance.me/mamecase"
 
   livecheck do
     url "https://api.douglaslassance.me/v1/mamecase"

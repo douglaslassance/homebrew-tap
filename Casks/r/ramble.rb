@@ -1,6 +1,6 @@
 cask "ramble" do
-  version "1.0.1"
-  sha256 "8f440ecd78f039d3008d6a60525ab30faed42c20786d1a41c9dff3193a8344f2"
+  version "1.1.0"
+  sha256 "b0a2f99343b795a4c05a1307abead836180a8fdc2bddb1b5e4cfea99c2f73cf2"
 
   url "https://api.douglaslassance.me/v1/ramble/download/#{version}/aarch64-apple-darwin"
   name "Ramble"
